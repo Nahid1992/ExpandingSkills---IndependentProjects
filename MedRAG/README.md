@@ -126,7 +126,7 @@ curl http://localhost:8000/health
 
 ---
 
-## Skills Developed
+## Tools Used
 
 - **RAG pipeline design** — ingestion, chunking, embedding, retrieval, generation
 - **LangChain LCEL** — chaining retrievers, prompt templates, LLMs, output parsers
@@ -136,17 +136,6 @@ curl http://localhost:8000/health
 
 ---
 
-## Part of AI Portfolio
-
-This project is part of an ongoing series of independent builds focused on 
-developing industry AI/ML engineering skills:
-
-| Project | Focus |
-|---|---|
-| MedRAG | RAG, LangChain, FAISS, FastAPI, Docker |
-| JobScout *(coming soon)* | LangGraph, Agentic AI, Automated Pipelines |
-
----
 
 ## Author
 **Nahid Ul Islam, Ph.D.**  
