@@ -18,22 +18,22 @@ source material.
 
 ## Architecture
 ```
-PDF Documents </br>
-↓ </br>
-[ingest.py] </br>
-Load → Chunk → Embed → Save FAISS Index </br>
-↓ </br>
-FAISS Vector Store (local) </br>
-↓ </br>
-[app.py — FastAPI Server] </br>
-/query endpoint </br>
-↓ </br>
-User Question → Embed → Retrieve Top-4 Chunks </br>
-↓ </br>
-LangChain LCEL Chain </br>
-{context + question} → Prompt → LLM → Answer </br>
-↓ </br>
-JSON Response </br>
+PDF Documents 
+↓ 
+[ingest.py] 
+Load → Chunk → Embed → Save FAISS Index 
+↓ 
+FAISS Vector Store (local) 
+↓ 
+[app.py — FastAPI Server] 
+/query endpoint 
+↓ 
+User Question → Embed → Retrieve Top-4 Chunks 
+↓ 
+LangChain LCEL Chain 
+{context + question} → Prompt → LLM → Answer 
+↓ 
+JSON Response 
 ```
  
 ---
