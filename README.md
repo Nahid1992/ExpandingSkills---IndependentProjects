@@ -16,7 +16,7 @@ developing industry AI/ML engineering skills:
 
 | Project | Focus |
 |---|---|
-| MedRAG | RAG, LangChain, FAISS, FastAPI, Docker |
+| [MedRAG](https://github.com/Nahid1992/ExpandingSkills---IndependentProjects/tree/main/MedRAG) | RAG, LangChain, FAISS, FastAPI, Docker |
 | JobScout *(coming soon)* | LangGraph, Agentic AI, Automated Pipelines |
 
 ---
