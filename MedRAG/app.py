@@ -1,25 +1,47 @@
-## Runs:
-# ollama serve  # in first terminal
-# uvicorn app:main --reload # in second terminal
+"""
+app.py — FastAPI Server for MedRAG
 
-## in third terminal
-#  curl -X POST http://localhost:8000/query \
-#   -H "Content-Type: application/json" \
-#   -d '{"question": "What is Lock-Release Pretraining?"}'  
+Serves a REST API that answers questions grounded in indexed medical literature
+using a Retrieval-Augmented Generation (RAG) pipeline.
 
-## Loads FAISS index from local directory;
-## Conects to Ollama
-## Assembles the full RAG chain and keeps it read
+At Startup:
+    - Loads the FAISS vector index built by ingest.py
+    - Initializes the HuggingFace embedding model for query encoding
+    - Connects to the Ollama LLM backend (llama3.2)
+    - Assembles the LangChain LCEL retrieval-generation chain
 
-## query sent as questions
-## embeds the questions into vector using the same HuggingFaceEmbeddings model
-## searches 4 most similar chanks from FAISS
-## inserts those chunks into prompt template as context
-## sends the full and updated prompts to llama3.2 via Ollama
-## returns the answer in terminal
+Query Pipeline (/query endpoint):
+    1. Embed    — Encodes the incoming question into a dense vector
+    2. Retrieve — Searches FAISS for the 4 most semantically similar chunks
+    3. Prompt   — Injects retrieved chunks as context into the prompt template
+    4. Generate — Sends the prompt to llama3.2 via Ollama and returns the answer
 
-## After docker is installed:
-# terminal run: docker run -p 8000:8000 medrag
+Endpoints:
+    POST /query   — Accepts a JSON question, returns a grounded answer
+    GET  /health  — Returns service status for health monitoring
+
+Usage:
+
+    Local (without Docker):
+        # Terminal 1 — start Ollama
+        ollama serve
+
+        # Terminal 2 — start FastAPI server
+        uvicorn app:app --reload
+
+        # Terminal 3 — send a query
+        curl -X POST http://localhost:8000/query \
+             -H "Content-Type: application/json" \
+             -d '{"question": "What is Lock-Release Pretraining?"}'
+
+    With Docker:
+        docker run -p 8000:8000 medrag
+
+Note:
+    Ensure ingest.py has been run and the faiss_index/ directory exists
+    before starting the server. Ollama must be running and accessible
+    at host.docker.internal:11434 when running inside Docker.
+"""
 
 from fastapi import FastAPI
 from pydantic import BaseModel
